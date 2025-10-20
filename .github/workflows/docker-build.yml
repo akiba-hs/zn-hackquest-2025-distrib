@@ -24,6 +24,7 @@ jobs:
         with:
           repository: akiba-hs/zn-hackquest-2025
           path: ${{ env.PATH_TO_CLONE }}
+          token: ${{ secrets.ZN25_CLONE_PRIVATE_PAT }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
