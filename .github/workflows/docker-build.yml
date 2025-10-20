@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: zn25-net-client
+  IMAGE_NAME: akiba-hs/zn25-net-client
   PATH_TO_CLONE: ./private-repo
 
 jobs:
