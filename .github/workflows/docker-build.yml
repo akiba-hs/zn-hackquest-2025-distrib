@@ -1,0 +1,54 @@
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: zn25-net-client
+  PATH_TO_CLONE: ./private-repo
+
+jobs:
+  build-and-push-amd64:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+
+      - name: Checkout private repository
+        uses: actions/checkout@v4
+        with:
+          repository: akiba-hs/zn-hackquest-2025
+          path: ${{ env.PATH_TO_CLONE }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prepare short commit hash
+        id: vars
+        run: echo "git_sha_short=$(cd ${{ env.PATH_TO_CLONE }} && git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          build-args: "version=${{ steps.vars.outputs.git_sha_short }}"
+          platforms: linux/amd64
+          push: true
+          context: ${{ env.PATH_TO_CLONE }}
+          file: ${{ env.PATH_TO_CLONE }}/user_docker/Dockerfile
+          provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.git_sha_short }}
