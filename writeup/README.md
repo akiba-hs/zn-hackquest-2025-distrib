@@ -25,7 +25,7 @@
 
 ![](assets/description.png)
 
-Тоже самое текстом:
+То же самое текстом:
 ```
 We missed those times when the internet was so simple and tiny, and the possibilities
 deemed so infinite... where the tru3 h4ck3rs explored the world... led by pure curiosity
