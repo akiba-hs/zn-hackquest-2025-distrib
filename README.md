@@ -6,6 +6,8 @@
 
 Контейнер для подключения к 31337 AKIBA n3tw0rk.
 
+Врайтап доступен здесь: [./writeup/](https://github.com/akiba-hs/zn-hackquest-2025-distrib/blob/main/writeup/README.md).
+
 Как играть:
 - Стартуй бота [@AkibaNetBot](https://t.me/AkibaNetBot)
 - Введи команду `/gen_new_config` - получишь свой ip-адрес и конфиг
@@ -67,6 +69,8 @@ docker pull ghcr.io/akiba-hs/zn25-net-client
 ----
 
 Container to connect to 31337 AKIBA n3tw0rk.
+
+The writeup (in russian) is available here: [./writeup/](https://github.com/akiba-hs/zn-hackquest-2025-distrib/blob/main/writeup/README.md).
 
 To play:
 - Start bot [@AkibaNetBot](https://t.me/AkibaNetBot)
